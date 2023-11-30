@@ -1,7 +1,7 @@
 # Личный проект «Readme»
 
-* Студент: [Григорий Полещук](https://up.htmlacademy.ru/nodejs-2/5/user/1448543).
-* Наставник: `Неизвестно`.
+- Студент: [Григорий Полещук](https://up.htmlacademy.ru/nodejs-2/5/user/1448543).
+- Наставник: [Александр Сушко](https://up.htmlacademy.ru/nodejs-2/5/user/281347).
 
 ---
 

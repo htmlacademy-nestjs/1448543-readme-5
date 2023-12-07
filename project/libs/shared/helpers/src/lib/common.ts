@@ -8,7 +8,7 @@ export function fillDto<T, V extends PlainObject>(
   options?: ClassTransformOptions
 ): T;
 
-export function fillDto<T, V extends PlainObject>(
+export function fillDto<T, V extends PlainObject[]>(
   DtoClass: new () => T,
   plainObject: V,
   options?: ClassTransformOptions

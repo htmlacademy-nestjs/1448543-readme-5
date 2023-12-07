@@ -1,5 +1,7 @@
+import { compare, genSalt, hash } from 'bcrypt';
 import { Entity } from '@project/core';
 import { AuthUser } from '@project/types';
+import { SALT_ROUNDS } from './user.constants';
 
 export class UserEntity implements AuthUser, Entity<string> {
   public id?: string;
@@ -26,5 +28,15 @@ export class UserEntity implements AuthUser, Entity<string> {
     this.email = data.email;
     this.firstname = data.firstname;
     this.lastname = data.lastname;
+  }
+
+  public async setPassword(password: string): Promise<UserEntity> {
+    const salt = await genSalt(SALT_ROUNDS);
+    this.passwordHash = await hash(password, salt);
+    return this;
+  }
+
+  public async comparePassword(password: string): Promise<boolean> {
+    return compare(password, this.passwordHash);
   }
 }

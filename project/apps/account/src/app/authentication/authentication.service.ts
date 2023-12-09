@@ -23,7 +23,14 @@ export class AuthenticationService {
   public async register(dto: CreateUserDto) {
     const { email, password, firstname, lastname, avatar } = dto;
 
-    const user = { email, firstname, lastname, avatar, passwordHash: '' };
+    const user = {
+      email,
+      firstname,
+      lastname,
+      avatar,
+      passwordHash: '',
+      registrationDate: new Date(),
+    };
 
     const existUser = await this.userRepository.findByEmail(email);
     if (existUser) {

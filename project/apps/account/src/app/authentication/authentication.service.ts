@@ -42,12 +42,11 @@ export class AuthenticationService {
       throw new NotFoundException(AUTH_USER_NOT_FOUND);
     }
 
-    const userEntity = new UserEntity(existUser);
-    if (!(await userEntity.comparePassword(password))) {
+    if (!(await existUser.comparePassword(password))) {
       throw new UnauthorizedException(AUTH_USER_PASSWORD_WRONG);
     }
 
-    return userEntity.toPOJO();
+    return existUser.toPOJO();
   }
 
   public async getUser(id: string) {

@@ -14,6 +14,7 @@ import {
 } from './authentication.constants';
 import { UserEntity } from '../user/user.entity';
 import { LoginUserDto } from './dto/login-user-dto';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 
 @Injectable()
 export class AuthenticationService {
@@ -24,8 +25,8 @@ export class AuthenticationService {
 
     const user = { email, firstname, lastname, avatar, passwordHash: '' };
 
-    const existsUser = await this.userRepository.findByEmail(email);
-    if (existsUser) {
+    const existUser = await this.userRepository.findByEmail(email);
+    if (existUser) {
       throw new ConflictException(AUTH_USER_EXISTS);
     }
 
@@ -51,5 +52,22 @@ export class AuthenticationService {
 
   public async getUser(id: string) {
     return this.userRepository.findById(id);
+  }
+
+  public async updatePassword(dto: UpdatePasswordDto) {
+    const { id, currentPassword, newPassword } = dto;
+
+    const existUser = await this.userRepository.findById(id);
+    if (!existUser) {
+      throw new NotFoundException(AUTH_USER_NOT_FOUND);
+    }
+
+    if (!(await existUser.comparePassword(currentPassword))) {
+      throw new UnauthorizedException(AUTH_USER_PASSWORD_WRONG);
+    }
+
+    const userEntity = await existUser.setPassword(newPassword);
+
+    return this.userRepository.save(userEntity);
   }
 }

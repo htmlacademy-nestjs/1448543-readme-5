@@ -1,6 +1,7 @@
 import { PostType } from '@project/types';
-import { PostTextEntity } from '../entity/post-text.entity';
+import { PostTextEntity, PostVideoEntity } from '../entity';
 
 export const TypeEntityAdapter = {
   [PostType.Text]: PostTextEntity,
+  [PostType.Video]: PostVideoEntity,
 };

@@ -16,7 +16,7 @@ export abstract class PostEntity implements AbstractPost {
     this.fillIntance(data);
   }
 
-  public getPlainObject() {
+  protected getPlainObject() {
     return {
       id: this.id,
       originId: this.originId,
@@ -31,7 +31,7 @@ export abstract class PostEntity implements AbstractPost {
     };
   }
 
-  private fillIntance(data: AbstractPost) {
+  protected fillIntance(data: AbstractPost) {
     this.id = data.id;
     this.originId = data.originId;
     this.userId = data.userId;

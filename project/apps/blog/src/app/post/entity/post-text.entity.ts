@@ -1,4 +1,4 @@
-import { PostText, PostType } from '@project/types';
+import { PostText } from '@project/types';
 import { PostEntity } from './post.entity';
 
 export class PostTextEntity extends PostEntity implements PostText {
@@ -24,6 +24,5 @@ export class PostTextEntity extends PostEntity implements PostText {
     this.text = data.text;
     this.preview = data.preview;
     this.headline = data.headline;
-    this.type = PostType.Text;
   }
 }

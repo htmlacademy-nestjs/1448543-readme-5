@@ -1,16 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UpdatePostDto } from './update-post.dto';
+import { UpdatePostCommonDto } from './update-post-common.dto';
 
-export class UpdatePostVideoDto extends UpdatePostDto {
+export class UpdatePostVideoDto extends UpdatePostCommonDto {
   @ApiProperty({
     description: 'Post headline',
     example: 'Look at this',
   })
-  public headline?: string;
+  public headline: string;
 
   @ApiProperty({
     description: 'Video link',
     example: 'https://video.com/1',
   })
-  public link?: string;
+  public link: string;
 }

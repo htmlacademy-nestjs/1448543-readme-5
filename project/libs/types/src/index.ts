@@ -3,7 +3,8 @@ export { AuthUser } from './lib/account/auth-user.interface';
 
 export { PostType } from './lib/blog/post/post-type.enum';
 export { PostStatus } from './lib/blog/post/post-status.enum';
-export { AbstractPost } from './lib/blog/post/abstract-post.interface';
+export { PostCommon } from './lib/blog/post/post-common.interface';
+export { PostContent } from './lib/blog/post/post-content.interface';
 export { PostLink } from './lib/blog/post/post-link.interface';
 export { PostVideo } from './lib/blog/post/post-video.interface';
 export { PostText } from './lib/blog/post/post-text.interface';

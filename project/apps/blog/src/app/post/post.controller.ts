@@ -8,6 +8,8 @@ import {
   CreatePostPhotoDto,
   CreatePostQuoteDto,
   CreatePostLinkDto,
+  CreatePostContentDto,
+  CreatePostDto,
 } from './dto/create';
 import {
   UpdatePostCommonDto,
@@ -45,7 +47,7 @@ export class PostController {
     description: 'Post created',
   })
   @Post(PostPath.Create)
-  public async create(@Body() dto: CreatePostCommonDto) {
+  public async create(@Body() dto: CreatePostDto) {
     const newPost = await this.postService.create(dto);
     return getPostRdo(newPost);
   }

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreatePostDto } from './create-post.dto';
+import { CreatePostCommonDto } from './create-post-common.dto';
 
-export class CreatePostLinkDto extends CreatePostDto {
+export class CreatePostLinkDto extends CreatePostCommonDto {
   @ApiProperty({
     description: 'Link URL',
     example: 'https://github.com',

@@ -1,18 +1,15 @@
 import { PostLink } from '@project/types';
-import { PostEntity } from './post.entity';
 
-export class PostLinkEntity extends PostEntity implements PostLink {
+export class PostLinkEntity implements PostLink {
   public link: string;
   public description: string;
 
   constructor(data: PostLink) {
-    super(data);
     this.populate(data);
   }
 
   public toPOJO() {
     return {
-      ...this.getPlainObject(),
       description: this.description,
       link: this.link,
     };

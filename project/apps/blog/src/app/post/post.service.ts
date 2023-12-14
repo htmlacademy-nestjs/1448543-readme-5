@@ -1,21 +1,25 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PostRepository } from './post.repository';
-import { CreatePostCommonDto } from './dto/create/create-post-common.dto';
+import { CreatePostDto } from './dto/create/create-post-content.dto';
 import { randomUUID } from 'node:crypto';
 import { PostStatus } from '@project/types';
-import { TypeEntityAdapter } from './utils/entity-adapter';
+import { ContentEntityFactory } from './content-entity.factory';
 import { PostErrorMessage } from './post.constant';
 import { UpdatePostCommonDto } from './dto/update';
+import { PostCommonEntity } from './entity';
+import { fillDto } from '@project/helpers';
 
 @Injectable()
 export class PostService {
   constructor(private readonly postRepository: PostRepository) {}
 
-  public async create(dto: CreatePostCommonDto) {
+  public async create(dto: CreatePostDto) {
     const now = new Date();
+    const { tags, type, status, ...content } = dto;
 
-    const newPostData = {
-      ...dto,
+    const newPostCommonData = {
+      tags: tags,
+      type: type,
       userId: randomUUID(),
       createdAt: now,
       publishedAt: now,
@@ -23,9 +27,17 @@ export class PostService {
       isReposted: false,
     };
 
-    const TypeEntity = TypeEntityAdapter[dto.type];
-    const newPostEntity = new TypeEntity(newPostData);
-    return this.postRepository.save(newPostEntity);
+    const newCommonEntity = new PostCommonEntity(newPostCommonData);
+    const savedCommonPost = this.postRepository.save(newCommonEntity);
+    const newContentEntity = new ContentEntityFactory(
+      type,
+      content
+    ).getContent();
+    // TODO
+    // 1. Создать отдельные репозитории для каждого типа контента
+    // 2. Сохранить сущность в нужном репозитории
+    // 3. Объединить ответ с savedCommonPost
+    // return this.postRepository.save(newPostCommonData);
   }
 
   public async update(id: string, dto: UpdatePostCommonDto) {
@@ -35,9 +47,9 @@ export class PostService {
       ...dto,
       publishedAt: new Date(),
     };
-    const TypeEntity = TypeEntityAdapter[dto.type];
-    const newPostEntity = new TypeEntity(updatedPostData);
-    return this.postRepository.update(id, newPostEntity);
+    // const TypeEntity = ContentEntityAdapter[dto.type];
+    // const newPostEntity = new TypeEntity(updatedPostData);
+    // return this.postRepository.update(id, newPostEntity);
   }
 
   public async repost(id: string, userId: string) {
@@ -54,7 +66,7 @@ export class PostService {
       publishedAt: new Date(),
     };
 
-    const TypeEntity = TypeEntityAdapter[originalPost.type];
+    const TypeEntity = ContentEntityAdapter[originalPost.type];
     const newPostEntity = new TypeEntity(repostedPost);
 
     return newPostEntity;

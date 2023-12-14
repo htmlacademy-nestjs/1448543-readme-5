@@ -1,5 +1,5 @@
-export { PostEntity } from './post.entity';
 export { PostCommonEntity } from './post-common.entity';
+export { PostContentEntity } from './post-content.entity';
 export { PostTextEntity } from './post-text.entity';
 export { PostVideoEntity } from './post-video.entity';
 export { PostPhotoEntity } from './post-photo.entity';

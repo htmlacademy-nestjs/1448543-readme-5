@@ -1,6 +1,5 @@
-import { AbstractPost } from './abstract-post.interface';
-
-export interface PostText extends AbstractPost {
+export interface PostText {
+  id?: string;
   headline: string;
   preview: string;
   text: string;

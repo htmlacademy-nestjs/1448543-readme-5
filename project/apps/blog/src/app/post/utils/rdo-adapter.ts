@@ -1,10 +1,10 @@
 import { fillDto } from '@project/helpers';
 import { PostType } from '@project/types';
 import { PostTextRdo, PostVideoRdo } from '../rdo';
-import { PostCommonEntity } from '../entity';
+import { PostContentEntity } from '../entity';
 
-export function getPostRdo(post: PostCommonEntity) {
-  switch (post.type) {
+export function getPostRdo(post: PostContentEntity, type: PostType) {
+  switch (type) {
     case PostType.Text:
       return fillDto(PostTextRdo, post.toPOJO());
     case PostType.Video:

@@ -1,12 +1,21 @@
-import { UpdatePostTextDto } from './update-post-text.dto';
-import { UpdatePostVideoDto } from './update-post-video.dto';
-import { UpdatePostPhotoDto } from './update-post-photo.dto';
-import { UpdatePostQuoteDto } from './update-post-quote.dto';
-import { UpdatePostLinkDto } from './update-post-link.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
-export type UpdatePostCommonDto =
-  | UpdatePostTextDto
-  | UpdatePostVideoDto
-  | UpdatePostPhotoDto
-  | UpdatePostQuoteDto
-  | UpdatePostLinkDto;
+export class UpdatePostCommonDto {
+  @ApiProperty({
+    description: 'Post type',
+    example: 'text',
+  })
+  public type: string;
+
+  @ApiProperty({
+    description: 'Post status',
+    example: 'published',
+  })
+  public status: string;
+
+  @ApiProperty({
+    description: 'Post tags',
+    example: ['cooking'],
+  })
+  public tags: string;
+}

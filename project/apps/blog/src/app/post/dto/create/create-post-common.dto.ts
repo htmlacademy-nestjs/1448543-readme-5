@@ -1,12 +1,22 @@
-import { CreatePostTextDto } from './create-post-text.dto';
-import { CreatePostVideoDto } from './create-post-video.dto';
-import { CreatePostPhotoDto } from './create-post-photo.dto';
-import { CreatePostQuoteDto } from './create-post-quote.dto';
-import { CreatePostLinkDto } from './create-post-link.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { PostStatus, PostType } from '@project/types';
 
-export type CreatePostCommonDto =
-  | CreatePostTextDto
-  | CreatePostVideoDto
-  | CreatePostPhotoDto
-  | CreatePostQuoteDto
-  | CreatePostLinkDto;
+export class CreatePostCommonDto {
+  @ApiProperty({
+    description: 'Post type',
+    example: 'text',
+  })
+  public type: PostType;
+
+  @ApiProperty({
+    description: 'Post status',
+    example: 'published',
+  })
+  public status: PostStatus;
+
+  @ApiProperty({
+    description: 'Post tags',
+    example: ['cooking'],
+  })
+  public tags: string[];
+}

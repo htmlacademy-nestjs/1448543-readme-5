@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreatePostDto } from './create-post.dto';
+import { CreatePostCommonDto } from './create-post-common.dto';
 
-export class CreatePostVideoDto extends CreatePostDto {
+export class CreatePostVideoDto extends CreatePostCommonDto {
   @ApiProperty({
     description: 'Post headline',
     example: 'Look at this',

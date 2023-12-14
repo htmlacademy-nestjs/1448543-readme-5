@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreatePostDto } from './create-post.dto';
+import { CreatePostCommonDto } from './create-post-common.dto';
 
-export class CreatePostTextDto extends CreatePostDto {
+export class CreatePostTextDto extends CreatePostCommonDto {
   @ApiProperty({
     description: 'Post text',
     example: 'This is my first post on this platform',

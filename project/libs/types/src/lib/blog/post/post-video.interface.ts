@@ -1,5 +1,4 @@
-import { AbstractPost } from './abstract-post.interface';
-export interface PostVideo extends AbstractPost {
+export interface PostVideo {
   headline: string;
   link: string;
 }

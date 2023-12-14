@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreatePostDto } from './create-post.dto';
+import { CreatePostCommonDto } from './create-post-common.dto';
 
-export class CreatePostPhotoDto extends CreatePostDto {
+export class CreatePostPhotoDto extends CreatePostCommonDto {
   @ApiProperty({
     description: 'Photo',
     example: 'pictures/pic-1.png',

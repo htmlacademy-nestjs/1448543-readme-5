@@ -10,3 +10,4 @@ export { PostText } from './lib/blog/post/post-text.interface';
 export { PostQuote } from './lib/blog/post/post-quote.interface';
 export { PostPhoto } from './lib/blog/post/post-photo.interface';
 export { Like } from './lib/blog/like/like.interface';
+export { Comment } from './lib/blog/comment/comment.interface';

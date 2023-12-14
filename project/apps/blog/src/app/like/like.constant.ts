@@ -7,4 +7,5 @@ export const LikePath = {
 
 export const LikeErrorMessage = {
   InDraft: 'Post in draft status',
+  PostNotFound: 'Post not found',
 };

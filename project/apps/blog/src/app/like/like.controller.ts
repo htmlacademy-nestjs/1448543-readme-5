@@ -3,7 +3,7 @@ import { LikeService } from './like.service';
 import { CreateLikeDto } from './dto/create-like.dto';
 import { fillDto } from '@project/helpers';
 import { LikeRdo } from './rdo/like.rdo';
-import { LIKE_API_NAME, LikePath } from './like.constant';
+import { LIKE_API_NAME, LikeErrorMessage, LikePath } from './like.constant';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags(LIKE_API_NAME)
@@ -15,6 +15,14 @@ export class LikeController {
     type: LikeRdo,
     status: HttpStatus.OK,
     description: 'Like updated',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: LikeErrorMessage.InDraft,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: LikeErrorMessage.PostNotFound,
   })
   @Post(LikePath.React)
   public async react(@Body() dto: CreateLikeDto) {

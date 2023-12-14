@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateLikeDto } from './dto/create-like.dto';
 import { LikeRepository } from './like.repository';
 import { LikeEntity } from './like.entity';
@@ -15,6 +19,9 @@ export class LikeService {
   public async react(dto: CreateLikeDto) {
     const { postId, userId } = dto;
     const post = await this.postRepository.findById(postId);
+    if (!post) {
+      throw new NotFoundException(LikeErrorMessage.PostNotFound);
+    }
     if (post.status === PostStatus.Draft) {
       throw new BadRequestException(LikeErrorMessage.InDraft);
     }

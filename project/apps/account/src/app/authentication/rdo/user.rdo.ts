@@ -14,7 +14,7 @@ export class UserRdo {
     example: '1970-01-01T00:00:00.000Z',
   })
   @Expose()
-  public registrationDate: string;
+  public createdAt: string;
 
   @ApiProperty({
     description: 'User avatar path',

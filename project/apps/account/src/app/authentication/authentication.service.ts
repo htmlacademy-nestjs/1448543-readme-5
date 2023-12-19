@@ -29,7 +29,6 @@ export class AuthenticationService {
       lastname,
       avatar,
       passwordHash: '',
-      registrationDate: new Date(),
     };
 
     const existUser = await this.userRepository.findByEmail(email);

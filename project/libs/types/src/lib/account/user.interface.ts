@@ -3,5 +3,6 @@ export interface User {
   email: string;
   firstname: string;
   lastname: string;
-  avatar?: File;
+  createdAt?: Date;
+  avatar?: string;
 }

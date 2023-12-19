@@ -9,7 +9,8 @@ export class UserEntity implements AuthUser, Entity<string> {
   public firstname: string;
   public lastname: string;
   public passwordHash: string;
-  public registrationDate: Date;
+  public avatar?: string;
+  public createdAt?: Date;
 
   constructor(user: AuthUser) {
     this.populate(user);
@@ -22,15 +23,19 @@ export class UserEntity implements AuthUser, Entity<string> {
       firstname: this.firstname,
       lastname: this.lastname,
       passwordHash: this.passwordHash,
-      registrationDate: this.registrationDate,
+      avatar: this.avatar,
+      createdAt: this.createdAt,
     };
   }
 
   public populate(data: AuthUser): void {
+    this.id = data.id;
     this.email = data.email;
     this.firstname = data.firstname;
     this.lastname = data.lastname;
-    this.registrationDate = data.registrationDate;
+    this.passwordHash = data.passwordHash;
+    this.avatar = data.avatar;
+    this.createdAt = data.createdAt;
   }
 
   public async setPassword(password: string): Promise<UserEntity> {
@@ -41,5 +46,9 @@ export class UserEntity implements AuthUser, Entity<string> {
 
   public async comparePassword(password: string): Promise<boolean> {
     return compare(password, this.passwordHash);
+  }
+
+  static fromObject(data: AuthUser): UserEntity {
+    return new UserEntity(data);
   }
 }

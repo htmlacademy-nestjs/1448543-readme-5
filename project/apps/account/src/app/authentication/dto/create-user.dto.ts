@@ -29,5 +29,5 @@ export class CreateUserDto {
     description: 'User avarar',
     example: '',
   })
-  public avatar?: File;
+  public avatar?: string;
 }

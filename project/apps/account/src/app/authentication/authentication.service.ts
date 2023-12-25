@@ -72,7 +72,6 @@ export class AuthenticationService {
     }
 
     const userEntity = await existUser.setPassword(newPassword);
-
-    return this.userRepository.save(userEntity);
+    return this.userRepository.update(userEntity.id, userEntity);
   }
 }

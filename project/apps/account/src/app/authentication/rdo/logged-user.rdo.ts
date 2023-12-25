@@ -10,7 +10,7 @@ export class LoggedUserRdo {
   public id: string;
 
   @ApiProperty({
-    description: 'User email',
+    description: 'Unique user email',
     example: 'user@example.com',
   })
   @Expose()

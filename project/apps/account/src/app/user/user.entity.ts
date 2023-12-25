@@ -6,8 +6,7 @@ import { SALT_ROUNDS } from './user.constants';
 export class UserEntity implements AuthUser, Entity<string> {
   public id?: string;
   public email: string;
-  public firstname: string;
-  public lastname: string;
+  public name: string;
   public passwordHash: string;
   public avatar?: string;
   public createdAt?: Date;
@@ -20,8 +19,7 @@ export class UserEntity implements AuthUser, Entity<string> {
     return {
       id: this.id,
       email: this.email,
-      firstname: this.firstname,
-      lastname: this.lastname,
+      name: this.name,
       passwordHash: this.passwordHash,
       avatar: this.avatar,
       createdAt: this.createdAt,
@@ -31,8 +29,7 @@ export class UserEntity implements AuthUser, Entity<string> {
   public populate(data: AuthUser): void {
     this.id = data.id;
     this.email = data.email;
-    this.firstname = data.firstname;
-    this.lastname = data.lastname;
+    this.name = data.name;
     this.passwordHash = data.passwordHash;
     this.avatar = data.avatar;
     this.createdAt = data.createdAt;

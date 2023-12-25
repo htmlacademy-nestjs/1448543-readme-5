@@ -8,16 +8,10 @@ export class CreateUserDto {
   public email: string;
 
   @ApiProperty({
-    description: 'User first name',
-    example: 'Firstname',
+    description: 'User name',
+    example: 'Firstname Lastname',
   })
-  public firstname: string;
-
-  @ApiProperty({
-    description: 'User last name',
-    example: 'Lastname',
-  })
-  public lastname: string;
+  public name: string;
 
   @ApiProperty({
     description: 'User password',

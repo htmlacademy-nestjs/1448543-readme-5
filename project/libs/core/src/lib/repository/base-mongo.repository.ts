@@ -21,12 +21,10 @@ export abstract class BaseMongoRepository<
       return null;
     }
 
-    const objectFromDocument = document.toObject({ versionKey: false });
-
-    return this.createEntity({
-      ...objectFromDocument,
-      id: objectFromDocument._id,
-    });
+    const { _id, ...rest } = document.toObject({ versionKey: false });
+    const newEntity = this.createEntity(rest);
+    newEntity.id = _id.toString();
+    return newEntity;
   }
 
   public async findById(id: EntityType['id']): Promise<EntityType | null> {
@@ -37,8 +35,7 @@ export abstract class BaseMongoRepository<
   public async save(entity: EntityType): Promise<EntityType> {
     const newEntity = new this.model(entity.toPOJO());
     await newEntity.save();
-    entity.id = newEntity._id.toString();
-    return entity;
+    return this.createEntityFromDocument(newEntity);
   }
 
   public async update(

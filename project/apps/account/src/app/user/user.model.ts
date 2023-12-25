@@ -10,12 +10,7 @@ export class UserModel extends Document implements AuthUser {
   @Prop({
     required: true,
   })
-  public firstname: string;
-
-  @Prop({
-    required: true,
-  })
-  public lastname: string;
+  public name: string;
 
   @Prop({
     required: true,

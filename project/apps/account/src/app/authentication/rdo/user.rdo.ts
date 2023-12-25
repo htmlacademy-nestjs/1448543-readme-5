@@ -14,7 +14,7 @@ export class UserRdo {
     example: '1970-01-01T00:00:00.000Z',
   })
   @Expose()
-  public createdAt: string;
+  public createdAt: Date;
 
   @ApiProperty({
     description: 'User avatar path',
@@ -24,23 +24,16 @@ export class UserRdo {
   public avatar: string;
 
   @ApiProperty({
-    description: 'User email',
+    description: 'Unique user email',
     example: 'user@example.com',
   })
   @Expose()
   public email: string;
 
   @ApiProperty({
-    description: 'User first name',
-    example: 'Firstname',
+    description: 'User name',
+    example: 'Firstname Lastname',
   })
   @Expose()
-  public firstname: string;
-
-  @ApiProperty({
-    description: 'User last name',
-    example: 'Lastname',
-  })
-  @Expose()
-  public lastname: string;
+  public name: string;
 }

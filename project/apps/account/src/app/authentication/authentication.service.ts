@@ -21,15 +21,13 @@ export class AuthenticationService {
   constructor(private readonly userRepository: UserRepository) {}
 
   public async register(dto: CreateUserDto) {
-    const { email, password, firstname, lastname, avatar } = dto;
+    const { email, password, name, avatar } = dto;
 
     const user = {
       email,
-      firstname,
-      lastname,
+      name,
       avatar,
       passwordHash: '',
-      registrationDate: new Date(),
     };
 
     const existUser = await this.userRepository.findByEmail(email);
@@ -74,7 +72,6 @@ export class AuthenticationService {
     }
 
     const userEntity = await existUser.setPassword(newPassword);
-
-    return this.userRepository.save(userEntity);
+    return this.userRepository.update(userEntity.id, userEntity);
   }
 }

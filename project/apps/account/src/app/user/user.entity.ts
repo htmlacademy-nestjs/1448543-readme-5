@@ -6,10 +6,10 @@ import { SALT_ROUNDS } from './user.constants';
 export class UserEntity implements AuthUser, Entity<string> {
   public id?: string;
   public email: string;
-  public firstname: string;
-  public lastname: string;
+  public name: string;
   public passwordHash: string;
-  public registrationDate: Date;
+  public avatar?: string;
+  public createdAt?: Date;
 
   constructor(user: AuthUser) {
     this.populate(user);
@@ -19,18 +19,20 @@ export class UserEntity implements AuthUser, Entity<string> {
     return {
       id: this.id,
       email: this.email,
-      firstname: this.firstname,
-      lastname: this.lastname,
+      name: this.name,
       passwordHash: this.passwordHash,
-      registrationDate: this.registrationDate,
+      avatar: this.avatar,
+      createdAt: this.createdAt,
     };
   }
 
   public populate(data: AuthUser): void {
+    this.id = data.id;
     this.email = data.email;
-    this.firstname = data.firstname;
-    this.lastname = data.lastname;
-    this.registrationDate = data.registrationDate;
+    this.name = data.name;
+    this.passwordHash = data.passwordHash;
+    this.avatar = data.avatar;
+    this.createdAt = data.createdAt;
   }
 
   public async setPassword(password: string): Promise<UserEntity> {
@@ -41,5 +43,9 @@ export class UserEntity implements AuthUser, Entity<string> {
 
   public async comparePassword(password: string): Promise<boolean> {
     return compare(password, this.passwordHash);
+  }
+
+  static fromObject(data: AuthUser): UserEntity {
+    return new UserEntity(data);
   }
 }

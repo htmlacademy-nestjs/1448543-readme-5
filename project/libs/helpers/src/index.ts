@@ -1,1 +1,1 @@
-export { fillDto } from './lib/common';
+export { fillDto, getMongoConnectionString } from './lib/common';
